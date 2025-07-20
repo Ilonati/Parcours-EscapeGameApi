@@ -12,8 +12,8 @@ module.exports = (req, res, next) => {
   const token = authHeader.split(" ")[1];
 
   try {
-    //TODO : Vérifier le token JWT avec la clé secrète JWT_SECRET
-    const payload =
+    // Vérifier le token JWT avec la clé secrète JWT_SECRET
+    const payload = jwt.verify(token, JWT_SECRET);
     const user = findUserByUsername(payload.username);
     if (!user) throw new Error("User not found");
     req.user = user;

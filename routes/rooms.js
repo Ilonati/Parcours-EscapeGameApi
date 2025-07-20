@@ -4,9 +4,8 @@ const roomsController = require("../controllers/roomsController");
 const auth = require("../middleware/auth");
 const accessControl = require("../middleware/accessControl");
 
-// TODO : Ajouter middleware d'authentification auth et de contrôle d'accès accessControl aux routes
-router.get("/:id", roomsController.getRoom);
-// TODO : Ajouter middleware d'authentification auth et de contrôle d'accès accessControl à la route pour soumettre une réponse
-router.post("/:id/answer", roomsController.submitAnswer);
+// Routes protégées par auth + accessControl
+router.get("/:id", auth, accessControl, roomsController.getRoom);
+router.post("/:id/answer", auth, accessControl, roomsController.submitAnswer);
 
 module.exports = router;
